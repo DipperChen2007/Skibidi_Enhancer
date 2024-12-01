@@ -22,7 +22,7 @@ graph_input = [[0, 1, 10],
             [3, 2, 4]]
 
 def MST(graph):
-    graph_input.sort(key=lambda x:x[2])
+    graph.sort(key=lambda x:x[2])
     e = 0
     parent = []
     rank = []
@@ -37,7 +37,7 @@ def MST(graph):
     total_edges = len(graph.keys()) - 1
     
     while e < total_edges:
-        u,v,w = graph_input[i]
+        u,v,w = graph[i]
         i += 1
         u_parent = Find_parent(parent,u)
         v_parent = Find_parent(parent,v)
@@ -67,6 +67,7 @@ def Update_parent(parent,u,v,rank):
     
     
 def Take_input():
+    
     graph = defaultdict(list)
     for line in graph_input:
         point_1,point_2,weight = line[0],line[1],line[2]
