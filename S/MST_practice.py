@@ -28,9 +28,9 @@ def MST(graph):
     rank = []
     for i in range(len(graph.keys())):
         rank.append(0)
-        #[0,0,1,0]
+        #[0,0,0,0]
         parent.append(i)
-        #[0,2,2,3]
+        #[0,1,2,3]
    
     result = []
     i = 0 
