@@ -9,6 +9,6 @@
     # else:
         # add cost`
 
-# return cost
 
-# *1: use dijkstra to calculate the shortest path
+# return cost
+# *1: use dijkstra to calculate the shortest paths
