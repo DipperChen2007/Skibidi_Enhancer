@@ -1,4 +1,7 @@
 # 0 -> black , 1 -> gold
+
+# NEW METHOD
+
 def MA(grid, lst):
     row_flip = [0] * len(grid)  
     col_flip = [0] * len(grid[0])  
