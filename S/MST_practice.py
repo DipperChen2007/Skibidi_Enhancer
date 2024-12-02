@@ -22,11 +22,11 @@ graph_input = [[0, 1, 10],
             [3, 2, 4]]
 
 def MST(graph):
-    graph.sort(key=lambda x:x[2])
+    graph_input .sort(key=lambda x:x[2])
     e = 0
     parent = []
     rank = []
-    for i in range(len(graph.keys())):
+    for i in range(len(graph_input .keys())):
         rank.append(0)
         #[0,0,0,0]
         parent.append(i)
@@ -75,6 +75,15 @@ def Take_input():
         graph[point_2].append((point_1,weight))
         
     return graph    
+
+
+
+
+
+
+
+
+
 
 
 def minCostConnectPoints(points):

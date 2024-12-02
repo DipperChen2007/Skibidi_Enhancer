@@ -13,6 +13,16 @@ from collections import defaultdict
 
 # return cost
 # *1: use dijkstra to calculate the shortest paths
+def MST(n,m,dic):
+    edges = 0
+    total_edges = n
+    parent = []
+    rank = []
+    for i in range(m):
+        rank.append(0)
+        parent.append(i)
+        
+        
 
 def take_input():
     n,m = map(int,input().split())
