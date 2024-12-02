@@ -7,7 +7,7 @@
     # if a -> b has a faster detour (*1)
         # remove road
     # else:
-        # add cost`
+        # add cost
 
 
 # return cost
