@@ -13,29 +13,37 @@ from collections import defaultdict
 
 # return cost
 # *1: use dijkstra to calculate the shortest paths
-def MST(n,m,dic):
+def MST(n,m,lst):
     edges = 0
-    total_edges = n
     parent = []
     rank = []
     for i in range(m):
         rank.append(0)
         parent.append(i)
-        
+    result = []
+    i = 0
+    total_edges = n 
+    
+    while edges < total_edges:
+        p1,p2,l,c = lst[i]
+        i += 1
+        pass
+
+
+def find_parent(parent,child):
+    if parent[child] != child:
+        parent[child] = find_parent(parent,parent[child])
+    return parent[child]
+    
         
 
 def take_input():
     n,m = map(int,input().split())
     lst = []
-    dic = defaultdict(list)
     for _ in range(m):
         lst.append(list(map(int,input().split())))
     lst.sort(key = lambda x:x[3])
-    for i in range(m):
-        p1,p2,l,c = lst[i]
-        dic[p1].append((p2,l,c))
-        dic[p2].append((p1,l,c))
-    return n,m,dic
+    return n,m,lst
 
-n,m,dic = take_input()
-print(n,m,dic)
+n,m,lst = take_input()
+print(n,m,lst)
