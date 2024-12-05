@@ -70,5 +70,4 @@ def take_input():
     return n,m,dic
 
 n,m,dic = take_input()
-print(dic)
 print(MST(n,m,dic))
