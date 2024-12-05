@@ -1,16 +1,15 @@
 def GG(be_in_same,not_be_in_same,groups):
-    answer=0
-    if be_in_same:
-        for c in be_in_same:
-            answer += 1
-            for group in groups:
+    answer = len(be_in_same)
+    for group in groups:
+        if be_in_same:
+            for c in be_in_same:
                 if set(c).issubset(group):
                     answer -= 1
-    if not_be_in_same:
-        for cc in not_be_in_same:
-            for group in groups:
+        if not_be_in_same:
+            for cc in not_be_in_same:
                 if set(cc).issubset(group):
                     answer += 1
+                    
     return answer
         
 
