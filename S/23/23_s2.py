@@ -1,24 +1,34 @@
-def Symmetric_Mountains(mountains):
-    answer_lst = []
-    for i in range(len(mountains)):
-        answer = find_symmetric(i+1,mountains)
-        answer_lst.append(answer)
-    print(*answer_lst)
-        
-def find_symmetric(i,mountains):
-    answer = float('inf')
-    if i == 1:
-        return 0
-    for j in range(len(mountains) - i + 1):
-        sub_lst = mountains[j:j + i]
-        abs_vlaue = 0
-        for l in range(len(sub_lst)//2):
-            a = abs(sub_lst[l] - sub_lst[-l - 1])
-            abs_vlaue += a 
-        
-        answer = min(answer,abs_vlaue)
-    return answer 
-        
+
+# e.g. mount = [1,2,3,4,5]
+def symMount(mount):
+    # construct dp and its default value
+    dp = [[] for _ in range(len(mount))]
+    for i in range(len(mount)):
+        # length == 1
+        dp[0].append(0)
+        # length == 2
+        if i != len(mount)-1:
+            dp[1].append(abs(mount[i]-mount[i+1]))
+    
+    ans = [0]
+
+    if len(mount) >= 2:
+        ans.append(min(dp[1]))
+
+    for i in range(2, len(mount)):
+        for j in range(len(mount)-i):
+            # update dp[i]
+            dp[i].append(abs(mount[j]-mount[j+i]) + dp[i-2][j+1])
+        ans.append(min(dp[i]))
+    print(*ans)
+# 1 2 3 4
+
+# [
+#     [0, 0, 0, 0],
+#     [1, 1, 1]
+#     [2, 2]
+#     [3+1]
+# ]
 
 def take_input():
     n = int(input())
@@ -26,5 +36,5 @@ def take_input():
     return mountains
 
 mountains = take_input()
-Symmetric_Mountains(mountains)
+symMount(mountains)
     
