@@ -19,7 +19,7 @@ def find_symmetric(i,mountains):
         answer = min(answer,abs_vlaue)
     return answer 
         
-        
+
 def take_input():
     n = int(input())
     mountains = list(map(int,input().split()))
