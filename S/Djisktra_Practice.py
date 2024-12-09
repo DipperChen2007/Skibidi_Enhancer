@@ -1,28 +1,32 @@
+# for BFS
+from collections import deque
+
 graph1 = {
     'a': ['b', 'c'],
-    'b': ['a'],
+    'b': ['a', 'c'],
     'c': ['a']
 }
 
 # use graph to find target, if found, return True, return False otherwise
 def dfs(graph, target):
-    frontier = ['a']
+    stack = ['a']
     visited = set()
-    while frontier:
-        current = frontier.pop()
+    while stack:
+        current = stack.pop()
         # check if visited
         if current in visited:
             continue
+        if current == target:
+            return True
         visited.add(current)
         # expand
         for point in graph[current]:
             if point not in visited:
-                frontier.append(point)
+                stack.append(point)
                 
-    if target in visited:
-        return True
-    else:
-        return False
+    return False
+
+def bfs(graph, target):
 
 
 dfs(graph1, 'c') # return True
