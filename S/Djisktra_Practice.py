@@ -1,6 +1,3 @@
-# for BFS
-from collections import deque
-
 graph1 = {
     'a': ['b', 'c'],
     'b': ['a', 'c'],
@@ -26,11 +23,27 @@ def dfs(graph, target):
                 
     return False
 
-def bfs(graph, target):
-
-
 dfs(graph1, 'c') # return True
 dfs(graph1, 'd') # return False
+
+# starting 'a', use graph to find target, if found, return the steps, return -1 otherwise
+from collections import deque
+def bfs(graph, target):
+    queue = deque([('a',0)])
+    visited = set()
+    while queue:
+        current,steps = queue.popleft()
+        if current in visited:
+            continue
+        if current == target:
+            return steps
+        visited.add(current)
+        for point in graph[current]:
+            if point not in visited:
+                queue.append((point,steps+1))
+    
+    return -1
+
 
 def djisktra(graph):
     pass
