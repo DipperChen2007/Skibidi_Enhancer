@@ -65,11 +65,23 @@ graph1 = {
 # expand b: heap[(1, 'c'), (2, 'd'), (3, 'b'), (3, 'a'), (5, 'c'), (5, 'a')] total += 1
 # expand c: heap[]
 import heapq
-def MST(graph, target):
+def MST(graph):
     hp = []
     heapq.heappush(hp,(0,'a'))
+    visited = set()
+    graph_total = 0
+    while hp:
+        length, current = heapq.heappop(hp)
+        if current in visited:
+            continue
+        # 查完立马放
+        visited.add(current)
+        graph_total += length
+        for (l,point) in graph[current]:
+            if point not in visited:
+                heapq.heappush(hp,(l,point))
+    return graph_total
     
-    
-    
-def djisktra(graph):
+# find the shortest path from start to end, return the minimum length
+def djisktra(graph, start, end):
     pass
