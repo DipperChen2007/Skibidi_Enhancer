@@ -83,5 +83,6 @@ def MST(graph):
     return graph_total
     
 # find the shortest path from start to end, return the minimum length
+# hint: how does the state accumulate in djisktra
 def djisktra(graph, start, end):
     pass
