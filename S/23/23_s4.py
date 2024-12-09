@@ -13,6 +13,7 @@ from collections import defaultdict
 
 # return cost
 # *1: use dijkstra to calculate the shortest paths
+
 def MST(n,m,dic):
     edges = 0
     parent = []
