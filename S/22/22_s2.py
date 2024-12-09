@@ -1,27 +1,48 @@
 def GG(be_in_same,not_be_in_same,groups):
-    answer = len(be_in_same)
+    answer = 0
     for group in groups:
-        if be_in_same:
-            for c in be_in_same:
-                if set(c).issubset(group):
-                    answer -= 1
-        if not_be_in_same:
-            for cc in not_be_in_same:
-                if set(cc).issubset(group):
+        # size(3)
+        groupSet = set(group)
+        for i in range(len(group)):
+            # size(3)
+            sA = group[i]
+            for s in be_in_same[sA]:
+                if s not in groupSet:
+                    answer +=1
+            for j in range(len(group)):
+                sB = group[j]
+                if sB in not_be_in_same[sA]:
                     answer += 1
-                    
-    return answer
-        
 
+
+
+        # if be_in_same:
+        # size(X) 
+        #     for c in be_in_same:
+        #         if set(c).issubset(group):
+        #             answer -= 1
+        # size(Y) 
+        # if not_be_in_same:
+        #     for cc in not_be_in_same:
+        #         if set(cc).issubset(group):
+        #             answer += 1
+                    
+    return answer // 2
+        
+from collections import defaultdict
 def take_input():
     x = int(input())
-    be_in_same = []
+    be_in_same = defaultdict(set)
     for _ in range(x):
-        be_in_same.append(list(input().split()))
+        studentA, studentB = input().split()
+        be_in_same[studentA].add(studentB)
+        be_in_same[studentB].add(studentA)
     y = int(input())
-    not_be_in_same = []
+    not_be_in_same = defaultdict(set)
     for j in range(y):
-        not_be_in_same.append(list(input().split()))
+        studentA, studentB = input().split()
+        not_be_in_same[studentA].add(studentB)
+        not_be_in_same[studentB].add(studentA)
     g = int(input())
     groups = []
     for jj in range(g):
@@ -31,3 +52,11 @@ def take_input():
 
 be_in_same,not_be_in_same,groups = take_input()
 print(GG(be_in_same,not_be_in_same,groups))
+
+# [[a, c], [a, b]]
+# {
+#   a: {c, b},
+#   c: {a},
+#   b: {a}
+# }
+
