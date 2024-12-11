@@ -1,13 +1,14 @@
 def PAP(lst):
     answer = []
     for e in lst:
-        a = b = e
+        a = e
+        b = e
         if number_is_prime(e):
             answer.append([a,b])
         else:
             while not number_is_prime(a) or not number_is_prime(b):
                 a-=1
-                a+=1
+                b+=1
             answer.append([a,b])
     
     for l in answer:
