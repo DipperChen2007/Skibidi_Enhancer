@@ -7,11 +7,22 @@ def high_low(lst):
             lst_low.append(e)
         else:
             lst_high.append(e)
+            
     lst_low.sort()
     lst_high.sort()
     answer = ""
-    for i in range(len(lst_low)):
-        answer += str(lst_low[::-1][i])+ " " + str(lst_high[i]) + " "
+    if len(lst_low) > len(lst_high):
+        for i in range(len(lst_high)):
+            answer += str(lst_low[::-1][i])+ " " + str(lst_high[i]) + " "
+        answer += str(lst_low[0])
+    elif len(lst_high) > len(lst_low):
+        for i in range(len(lst_low)):
+            answer += str(lst_low[::-1][i])+ " " + str(lst_high[i]) + " "
+        answer += str(lst_high[-1])
+    else:
+        for i in range(len(lst_low)):
+            answer += str(lst_low[::-1][i])+ " " + str(lst_high[i]) + " "
+
     return answer 
 
 def take_input():
