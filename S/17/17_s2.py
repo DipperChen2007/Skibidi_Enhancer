@@ -1,34 +1,25 @@
-def high_low(lst):
-    average = sum(lst)/len(lst)
-    lst_low = []
-    lst_high = []
-    for e in lst:
-        if e < average:
-            lst_low.append(e)
-        else:
-            lst_high.append(e)
-            
-    lst_low.sort()
-    lst_high.sort()
+def high_low_tide(n,lst):
     answer = ""
-    if len(lst_low) > len(lst_high):
-        for i in range(len(lst_high)):
-            answer += str(lst_low[::-1][i])+ " " + str(lst_high[i]) + " "
-        answer += str(lst_low[0])
-    elif len(lst_high) > len(lst_low):
-        for i in range(len(lst_low)):
-            answer += str(lst_low[::-1][i])+ " " + str(lst_high[i]) + " "
-        answer += str(lst_high[-1])
+    if n%2 == 0:
+        high_tide = n//2
+        low_tide = high_tide - 1
     else:
-        for i in range(len(lst_low)):
-            answer += str(lst_low[::-1][i])+ " " + str(lst_high[i]) + " "
+        low_tide = n//2 
+        high_tide = low_tide + 1
+    while high_tide < n:
+        answer += str(lst[low_tide]) + " " + str(lst[high_tide]) + " "
+        high_tide += 1
+        low_tide -= 1
+    if n%2 == 1:
+        answer += str(lst[0])
+    return answer
 
-    return answer 
 
 def take_input():
     n = int(input())
     lst = list(map(int,input().split()))
-    return lst 
+    lst.sort()
+    return n,lst
 
-lst = take_input()
-print(high_low(lst))
+n,lst = take_input()
+print(high_low_tide(n,lst))
