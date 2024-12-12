@@ -13,7 +13,6 @@ def high_low(lst):
     for i in range(len(lst_low)):
         answer += str(lst_low[::-1][i])+ " " + str(lst_high[i]) + " "
     return answer 
-    
 
 def take_input():
     n = int(input())
