@@ -85,4 +85,17 @@ def MST(graph):
 # find the shortest path from start to end, return the minimum length
 # hint: how does the state accumulate in djisktra
 def djisktra(graph, start, end):
-    pass
+    hp = []
+    heapq.heappush(hp,(start,0))
+    visited = set()
+    while hp:
+        current,step = heapq.heappop(hp)
+        if current in visited:
+            continue
+        visited.add(current)
+        if current == end:
+            return step
+        for l,point in graph[current]:
+            if point not in visited:
+                heapq.heappush(hp,(point,step + l))
+    return -1
