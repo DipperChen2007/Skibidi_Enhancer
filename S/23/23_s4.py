@@ -49,7 +49,7 @@ def take_input():
     for i in range(m):
         p1, p2, dist, cost = list(map(int,input().split()))
         roads.append((p1, p2, dist, cost, i))
-    roads.sort(key = lambda x:x[3])
+    roads.sort(key = lambda x:x[3], reverse=True)
     for i in range(m):
         p1, p2, dist, cost,id = roads[i]
         dic[p1].append([p2, dist, cost,id])
