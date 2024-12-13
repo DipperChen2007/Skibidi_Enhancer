@@ -1,4 +1,5 @@
 from collections import defaultdict
+import heapq
 # remove unnececery roads
 
 # 1. sort roads decendent从大到小
@@ -14,61 +15,46 @@ from collections import defaultdict
 # return cost
 # *1: use dijkstra to calculate the shortest paths
 
-def MST(n,m,dic):
-    edges = 0
-    parent = []
-    rank = []
-    for i in range(m):
-        rank.append(0)
-        parent.append(i)
-    result = []
-    i = 0
-    total_edges = n 
-    
-    while edges < total_edges:
-        p1 = i
-        for j in range(len(dic[i])):
-            p2,l,c = dic[i][j]
-            p1_parent = find_parent[parent,p1]
-            p2_parent = find_parent[parent,p2]
-            if p1_parent != p2_parent:
-                e += 1
-                result.append(c)
-                Update_parent(parent,p1,p2,rank)
-            
-    return sum(result)
-
-def Update_parent(parent,u,v,rank):
-    if rank[u] < rank[v]:
-        parent[u] = v
-    elif rank[u] > rank[v]:
-        parent[v] = u 
-    else:
-        parent[u] = v
-        rank[u] += 1
-        rank[v] = rank[u]
+def minCostRoad(n, m, dic, roads):
+    edge_remove = set()
+    total_cost = 0
+    for p1, p2, dist, cost, id in roads:
+        edge_remove.add(id)
+        l = dijkstra(p1,p2,edge_remove,dic)
+        if l > dist:
+            edge_remove.remove(id)
+            total_cost += cost
+    return total_cost
+# [(a, 3), (a, 4), (b, 1), (b, 6)]
+def dijkstra(p1, p2, edge_remove, dic):
+    hp = []
+    heapq.heappush(hp, (0, p1))
+    visited = set()
+    while hp:
+        step,current= heapq.heappop(hp)
+        if current in visited:
+            continue 
+        visited.add(current)
+        if current == p2:
+            return step
+        for point, dist, cost, id in dic[current]:
+            if point not in visited and id not in edge_remove:
+                heapq.heappush(hp,(step + dist,point))
+    return float('inf')
         
-
-
-def find_parent(parent,child):
-    if parent[child] != child:
-        parent[child] = find_parent(parent,parent[child])
-    return parent[child]
-    
-        
-
 def take_input():
     n,m = map(int,input().split())
-    lst = []
+    roads = []
     dic = defaultdict(list)
-    for _ in range(m):
-        lst.append(list(map(int,input().split())))
-    lst.sort(key = lambda x:x[3])
     for i in range(m):
-        p1,p2,l,c = lst[i]
-        dic[p1].append([p2,l,c])
-        dic[p2].append([p1,l,c])
-    return n,m,dic
+        p1, p2, dist, cost = list(map(int,input().split()))
+        roads.append((p1, p2, dist, cost, i))
+    roads.sort(key = lambda x:x[3])
+    for i in range(m):
+        p1, p2, dist, cost,id = roads[i]
+        dic[p1].append([p2, dist, cost,id])
+        dic[p2].append([p1, dist, cost,id])
+    return n, m, dic, roads
 
-n,m,dic = take_input()
-print(MST(n,m,dic))
+n, m, dic, roads = take_input()
+print(minCostRoad(n, m, dic, roads))
