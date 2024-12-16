@@ -86,7 +86,7 @@ def MST(graph):
 # hint: how does the state accumulate in djisktra
 def djisktra(graph, start, end):
     hp = []
-    heapq.heappush(hp,(start,0))
+    heapq.heappush(hp,(0,start))
     visited = set()
     while hp:
         current,step = heapq.heappop(hp)
@@ -97,5 +97,5 @@ def djisktra(graph, start, end):
             return step
         for l,point in graph[current]:
             if point not in visited:
-                heapq.heappush(hp,(point,step + l))
+                heapq.heappush(hp,(step + l,point))
     return -1
