@@ -4,7 +4,22 @@ from collections import deque,defaultdict
 
 def Daily_Commute(one_way_1,graph,swap,n):
     for i in range(len(swap)):
-        pass
+        getOffStation = len(swap)
+        minTravelTime = 1
+        swapA,swapB = swap[i]
+        timeA = calcMinTavelTime(swapA, bus, walk)
+        timeB = calcMinTavelTime(swapB, bus, walk)
+        
+        if getOffStation == swapA or getOffStation == swapB:
+            if timeA < timeB:
+                getOffStation = swapA
+                minTravelTime = timeA
+            else:
+                getOffStation = swapB
+                minTravelTime = timeB
+        else:
+            # compare swapA, swapB and getOffStation
+            pass
 
 def swap(bus,point_1,point_2):
     bus[point_1],bus[point_2] = bus[point_2],bus[point_1]
@@ -46,26 +61,26 @@ def take_input():
         
     return walk,bus,swap,n 
 
-{
-    1: 0,
-    2: 3,
-    3: 1,
-    4: 2
-}
+# {
+#     1: 0,
+#     2: 3,
+#     3: 1,
+#     4: 2
+# }
 
-{
-    1: -1,
-    2: -1,
-    3: 1,
-    4: 0
-}
+# {
+#     1: -1,
+#     2: -1,
+#     3: 1,
+#     4: 0
+# }
 
-{
-    1: -1,
-    2: -1,
-    3: 3,
-    4: 1
-}
+# {
+#     1: -1,
+#     2: -1,
+#     3: 3,
+#     4: 1
+# }
 # calculate before first swap
 getOffStation = 4
 minTravelTime = 1
