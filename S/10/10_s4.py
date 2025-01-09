@@ -1,5 +1,8 @@
 from collections import defaultdict
 
+def Animal_Farm(zone_connection):
+    
+
 def take_input():
     n= int(input())
     lst = []
@@ -27,7 +30,7 @@ def take_input():
                 if t in zone[j]:
                     zone_connection[i].append((j,t))
                     zone_connection[j].append((i,t))
-    return zone,zone_connection
+    return zone_connection
 
-zone,zone_connection = take_input()
-print(zone,zone_connection)
+zone_connection = take_input()
+print(zone_connection)
