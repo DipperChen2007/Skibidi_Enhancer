@@ -1,7 +1,26 @@
 from collections import defaultdict
+import heapq
 
 def Animal_Farm(zone_connection):
-    
+        hp = []
+        heapq.heappush(hp,(1,1))  # (zone, code)
+        visited = set()
+        graph_total = 0
+        while hp:
+            zone, code = heapq.heappop(hp)
+            if code in visited:
+                continue
+            # 查完立马放
+            visited.add(code)
+            for z,c,v in zone_connection[zone]:
+                if c == code:
+                    graph_total += v
+                    
+            for (z,c,v) in zone_connection[zone]:
+                if c not in visited:
+                    heapq.heappush(hp,(z,c))
+        return graph_total
+ 
        
 def take_input():
     n= int(input())
