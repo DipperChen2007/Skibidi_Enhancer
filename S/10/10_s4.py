@@ -2,7 +2,7 @@ from collections import defaultdict
 
 def Animal_Farm(zone_connection):
     
-
+       
 def take_input():
     n= int(input())
     lst = []
@@ -25,12 +25,14 @@ def take_input():
         zone[i+1].append((lst[i][1],lst[i][lst[i][0]],lst[i][-1]))
     zone_connection = defaultdict(list)
     for i in range(1,n + 1):
-        for t in zone[i]:
+        code = 1
+        for p1,p2,v in zone[i]:
             for j in range(i + 1,n + 1):
-                if t in zone[j]:
-                    zone_connection[i].append((j,t))
-                    zone_connection[j].append((i,t))
+                if (p1,p2,v) in zone[j]:
+                    zone_connection[i].append((j,code,v))
+                    zone_connection[j].append((i,code,v))
+            code += 1
     return zone_connection
 
 zone_connection = take_input()
-print(zone_connection)
+print(Animal_Farm(zone_connection))
