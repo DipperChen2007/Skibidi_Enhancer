@@ -50,7 +50,7 @@ graph1 = {
     'c': [(1, 'b'), (2, 'd'), (5, 'a')],
     'd': [(2, 'a'), (2, 'c')]
 }
-# MST 于BFS, DFS之间最大的区别在于每一个edge都带有一个weight(长度)，我们需要根据长度来决定使用哪条边
+# MST与BFS, DFS之间最大的区别在于每一个edge都带有一个weight(长度)，我们需要根据长度来决定使用哪条边
 # starting from 'a', find the minimum total length to connect the entire graph
 # 从a点出发， 拓展相邻的点和线，放在heap里面，按照长度排序
 
@@ -83,8 +83,8 @@ def MST(graph):
     return graph_total
     
 # find the shortest path from start to end, return the minimum length
-# hint: how does the state accumulate in djisktra
-def djisktra(graph, start, end):
+# hint: how does the state accumulate in dijkstra
+def dijkstra(graph, start, end):
     hp = []
     heapq.heappush(hp,(0,start))
     visited = set()
