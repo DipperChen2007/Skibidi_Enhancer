@@ -20,8 +20,7 @@ def Animal_Farm(zone_connection):
                 if c not in visited:
                     heapq.heappush(hp,(z,c))
         return graph_total
- 
-       
+
 def take_input():
     n= int(input())
     lst = []
