@@ -53,4 +53,4 @@ def take_input():
     return zone_connection
 
 zone_connection = take_input()
-print(Animal_Farm(zone_connection))
+print(zone_connection)
