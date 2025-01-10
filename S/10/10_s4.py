@@ -1,6 +1,9 @@
 from collections import defaultdict
 import heapq
 
+
+# {1: [(2, 1, 7), (4, 2, 4)], 2: [(1, 1, 7), (4, 2, 7), (3, 3, 2)], 4: [(1, 2, 4), (2, 2, 7), (3, 1, 4)], 3: [(2, 3, 2), (4, 1, 4)]})
+
 def Animal_Farm(zone_connection):
         hp = []
         heapq.heappush(hp,(1,1))  # (zone, code)
