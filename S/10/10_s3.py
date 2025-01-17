@@ -9,12 +9,14 @@ def is_possible(hose_length, houses, hydrants_left, total_houses):
     for i in range(total_houses):
         if is_connected[i]:
             continue
+        if hydrants_left == 0 or houses_left == 0:
+            break
         is_connected[i] = True
         houses_left -= 1
         hydrants_left -=1
         for j in range(i + 1,total_houses):
-            distance = min((100000 - houses[j] + houses[i]),houses[j] - houses[i]) 
-            if distance <= hose_length:
+            distance = min((1000000 - houses[j] + houses[i]),houses[j] - houses[i]) 
+            if distance <= hose_length and not is_connected[j]:
                 is_connected[j] = True
                 houses_left -= 1
                 
@@ -36,7 +38,8 @@ def firehouse(houses, k, H):
         if possible:
             maxLength = mid
         else:
-            minLength = mid
+            minLength = mid + 1
+            
     return (maxLength)
 
 def take_input():
@@ -44,9 +47,10 @@ def take_input():
     houses = []
     for _ in range(h):
         houses.append(int(input()))
+    houses.sort()
     k  = int(input())
     return h,k,houses
 
 
 h,k,houses = take_input()    
-print(h,k,houses)
+print(firehouse(houses, k, h))
