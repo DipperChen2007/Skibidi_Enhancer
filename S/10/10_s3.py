@@ -4,21 +4,21 @@
 #total_houses = 4
 
 def is_possible(hose_length, houses, hydrants_left, total_houses):
-    
+    houses_left = total_houses
     is_connected = [False] * total_houses
     for i in range(total_houses):
         if is_connected[i]:
             continue
         is_connected[i] = True
+        houses_left -= 1
+        hydrants_left -=1
         for j in range(i + 1,total_houses):
             distance = min((100000 - houses[j] + houses[i]),houses[j] - houses[i]) 
             if distance <= hose_length:
                 is_connected[j] = True
+                houses_left -= 1
                 
-    if False in is_connected:
-        return False
-    else:
-        return True
+    return houses_left == 0
 
 
 # parameters:
