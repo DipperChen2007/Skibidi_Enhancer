@@ -1,33 +1,63 @@
-#[[1, 1, 1], [1, 1, 0], [1, 2, 1], [2, 8, 5]]
-POINTS_1 = {(1,0),(2,0),(3,0),(2,1) }
-POINTS_2 = { (1,1),(2,2),(3,1) }
+n = int(input())
 
-def looking_glass(lst):
-    for magnification,p_x,p_y in lst:
-        if check_func(magnification,p_x,p_y):
-            print("crystal")
+grid = [
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 1, 1, 1, 0]
+]
+
+
+def get_answer(mag, x, y):
+    if mag == 1:
+        if grid[4 - y][x]:
+            return True
         else:
-            print("empty")
+            return False
 
-def check_func(magnification,p_x,p_y):
-    
-    if magnification == 1:
-        return (p_x,p_y) in POINTS_1
-    p_x_copy,p_y_copy = p_x//5,p_y//5
-    if (p_x_copy,p_y_copy) in POINTS_1:
+    s = (5 ** mag) // 5
+    col = ((x + 1) // s) - 1
+    remx = (x + 1) % s
+    # print(remx)
+    if remx > 0:
+        col += 1
+    # print(col)
+
+    row = ((y + 1) // s) - 1
+    remy = (y + 1) % s
+    # print(remy)
+
+    if remy > 0:
+        row += 1
+    # print(row)
+
+    if row == 4 or row == 3 or col == 0 or col == 4:
+        return False
+    elif 4 > col > 0 == row:
         return True
-    # p_x_copy,p_y_copy = p_x%5,p_y%5
-    if (p_x_copy,p_y_copy) in POINTS_2:
-        return check_func(magnification - 1,p_x%5,p_y%5)
-    
-    return False            
+    elif col == 2 and row == 1:
+        return True
+    else:
+        return get_answer(mag - 1, x - (s * col), y - (s * row))
 
-def take_input():
-    n = int(input())
-    lst = []
-    for _ in range(n):
-        lst.append(list(map(int,input().split())))
-    return lst
+    # else:
 
-lst = take_input()
-looking_glass(lst)
+
+for i in range(n):
+    m, x, y = [int(j) for j in input().split()]
+
+    if get_answer(m, x, y):
+        print("crystal")
+    else:
+        print("empty")
+# area = (x + 1 - (5 * ((x + 1) // sec)))
+# print(area)
+# if (x + 1) // sec == 1 or (x + 1) // sec == 5:
+#     print("empty")
+
+'''
+1
+3 25 24
+
+'''
