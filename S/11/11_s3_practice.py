@@ -3,3 +3,4 @@ def take_input():
     points = []
     for _ in range(n):
         points.append(list(map(int,input().split())))
+    
