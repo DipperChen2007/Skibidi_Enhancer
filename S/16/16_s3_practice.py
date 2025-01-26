@@ -1,5 +1,7 @@
 from collections import defaultdict
 
+
+
 def pruning(N, graph, pho):
     for node in range(N):
         while len(graph[node]) == 1 and node not in pho:
