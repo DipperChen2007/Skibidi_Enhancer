@@ -1,8 +1,8 @@
 grid = [
     [0,0,0,0,0],
-    [1,0,0,0,0],
-    [1,1,0,0,0],
-    [1,0,0,0,0],
+    [1,2,0,0,0],
+    [1,1,2,0,0],
+    [1,2,0,0,0],
     [0,0,0,0,0]
 ]
 
@@ -17,12 +17,16 @@ def looking_glass(magnitude, x, y):
             return "crystal"
         else:
             return "empty"
-
+    
     new_size = 5 ** (magnitude - 1)
     new_x = x % new_size
     new_y = y % new_size
-
-    return looking_glass(magnitude - 1, new_x, new_y)
+    if grid[x//new_size][y//new_size] == 1:
+        return "crystal"
+    elif grid[x//new_size][y//new_size] == 0:
+        return "empty"
+    else:
+        return looking_glass(magnitude - 1, new_x, new_y)
 
 def take_input():
     n = int(input())
