@@ -20,4 +20,3 @@ def take_input():
 
 points,m = take_input()
 print(main(points,m))
-        
