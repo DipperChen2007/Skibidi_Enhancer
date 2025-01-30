@@ -13,7 +13,7 @@ def GG(must_be_in_same,must_not_be_in_same,groups):
                 sB = group[j]
                 if sB in must_not_be_in_same[sA]:
                     answer += 1
-    return answer
+    return answer//2
 
 def take_input():
     n = int(input())
