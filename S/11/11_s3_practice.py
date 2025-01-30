@@ -11,22 +11,31 @@ def print_result(points):
         print(looking_glass(magnitude, x, y))
 
 def looking_glass(magnitude, x, y):
-    # Base case
-    if magnitude == 1:
-        if grid[x][y] == 1:
-            return "crystal"
-        else:
-            return "empty"
-    
-    new_size = 5 ** (magnitude - 1)
-    new_x = x % new_size
-    new_y = y % new_size
-    if grid[x//new_size][y//new_size] == 1:
-        return "crystal"
-    elif grid[x//new_size][y//new_size] == 0:
+    # Base case: check if coordinates are valid
+    if not (0 <= x < 5**magnitude and 0 <= y < 5**magnitude):
         return "empty"
-    else:
+    
+    # Calculate position in current level grid
+    cell_size = 5 ** (magnitude - 1)
+    current_x = x // cell_size
+    current_y = y // cell_size
+    
+    # Check if coordinates are within bounds
+    if not (0 <= current_x < 5 and 0 <= current_y < 5):
+        return "empty"
+    
+    # Get the cell type at current position
+    cell_type = grid[current_x][current_y]
+    
+    if cell_type == 1:
+        return "crystal"
+    elif cell_type == 2:
+        # If it's a recursive cell, check the smaller pattern
+        new_x = x % cell_size
+        new_y = y % cell_size
         return looking_glass(magnitude - 1, new_x, new_y)
+    else:
+        return "empty"
 
 def take_input():
     n = int(input())
