@@ -1,30 +1,38 @@
-def Good_groups(must_in,must_not_in,groups):
-    answer = len(must_in)
+from collections import defaultdict
+
+def GG(must_be_in_same,must_not_be_in_same,groups):
+    answer = 0
     for group in groups:
-        for student_1,student_2 in must_in:
-            if student_1 in group and student_2 in group:
-                answer -= 1
-        for student_1,student_2 in must_not_in:
-            if student_1 in group and student_2 in group:
-                answer += 1
-                
+        groupSet = set(group)
+        for i in range(len(group)):
+            sA = group[i]
+            for s in must_be_in_same[sA]:
+                if s not in groupSet:
+                    answer += 1
+            for j in range(len(group)):
+                sB = group[j]
+                if sB in must_not_be_in_same[sA]:
+                    answer += 1
     return answer
 
-
 def take_input():
-    x = int(input())
-    must_in = []
-    for i in range(x):
-        must_in.append(list(input().split()))
-    y = int(input())
-    must_not_in = []
-    for i in range(y):
-        must_not_in.append(list(input().split()))
+    n = int(input())
+    must_be_in_same = defaultdict(set)
+    for _ in range(n):
+        studentA,studentB = input().split()
+        must_be_in_same[studentA].add(studentB)
+        must_be_in_same[studentB].add(studentA)
+    m = int(input())
+    must_not_be_in_same = defaultdict(set)
+    for _ in range(m):
+        studentA,studentB = input().split()
+        must_not_be_in_same[studentA].add(studentB)
+        must_not_be_in_same[studentB].add(studentA)
     g = int(input())
     groups = []
-    for i in range(g):
+    for _ in range(g):
         groups.append(list(input().split()))
-    return must_in,must_not_in,groups
+    return must_be_in_same,must_not_be_in_same,groups
 
-must_in,must_not_in,groups = take_input()
-print(Good_groups(must_in,must_not_in,groups))
+must_be_in_same,must_not_be_in_same,groups = take_input()
+print(GG(must_be_in_same,must_not_be_in_same,groups))
