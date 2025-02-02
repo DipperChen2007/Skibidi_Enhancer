@@ -25,9 +25,7 @@ def Combining_Riceballs(n,lst):
                     left_right += 1
                     
                 else:
-                    right_left -= 1                 
-    print(dp)
-    print(prefix_sum)               
+                    right_left -= 1                               
     return result           
                                                             
         
